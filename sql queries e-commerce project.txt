@@ -1,0 +1,117 @@
+1. Total Orders 
+SELECT COUNT(*) AS total_orders FROM orders;
+
+2. Total Customers 
+SELECT COUNT(DISTINCT customer_id) AS total_customers FROM customers;
+
+3. Total Revenue
+SELECT ROUND(SUM(payment_value),2) AS total_revenue
+FROM order_payments;
+
+4. Avg Order value 
+SELECT ROUND(SUM(payment_value)/COUNT(DISTINCT order_id),2) AS avg_order_value
+FROM order_payments;
+
+5. Top 10 Products by Sales
+SELECT p.product_category_name, COUNT(*) AS total_sales
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_category_name
+ORDER BY total_sales DESC
+LIMIT 10;
+
+"product_category_name","total_sales"
+"cama_mesa_banho","11115"
+"beleza_saude","9670"
+"esporte_lazer","8641"
+"moveis_decoracao","8334"
+"informatica_acessorios","7827"
+"utilidades_domesticas","6964"
+"relogios_presentes","5991"
+"telefonia","4545"
+"ferramentas_jardim","4347"
+"automotivo","4235"
+
+6. Top 10 Cities by Orders
+SELECT c.customer_city, COUNT(o.order_id) AS total_orders
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+GROUP BY c.customer_city
+ORDER BY total_orders DESC
+LIMIT 10;
+
+"customer_city","total_orders"
+"sao paulo","15540"
+"rio de janeiro","6882"
+"belo horizonte","2773"
+"brasilia","2131"
+"curitiba","1521"
+"campinas","1444"
+"porto alegre","1379"
+"salvador","1245"
+"guarulhos","1189"
+"sao bernardo do campo","938"
+
+7. Revenue by Payment Type
+SELECT payment_type, SUM(payment_value) AS revenue
+FROM order_payments
+GROUP BY payment_type
+ORDER BY revenue DESC;
+
+"payment_type","revenue"
+"credit_card","12542084.189999327"
+"boleto","2869361.2699999753"
+"voucher","379436.8700000007"
+"debit_card","217989.7900000001"
+"not_defined","0"
+
+8. Avg Revieew Score
+SELECT ROUND(AVG(review_score),2) AS avg_rating
+FROM order_reviews;
+
+"avg_rating"
+"4.09"
+
+9. Late Deliveries
+SELECT COUNT(*) AS late_deliveries
+FROM orders
+WHERE order_delivered_customer_date > order_estimated_delivery_date;
+
+"late_deliveries"
+"7827"
+
+10. Monthly Sales Trend 
+SELECT 
+DATE_TRUNC('month', order_purchase_timestamp) AS month,
+SUM(payment_value) AS revenue
+FROM orders o
+JOIN order_payments op ON o.order_id = op.order_id
+GROUP BY month
+ORDER BY month;
+
+"month","revenue"
+"2016-09-01 00:00:00","252.24"
+"2016-10-01 00:00:00","59090.47999999999"
+"2016-12-01 00:00:00","19.62"
+"2017-01-01 00:00:00","138488.04"
+"2017-02-01 00:00:00","291908.01000000007"
+"2017-03-01 00:00:00","449863.5999999999"
+"2017-04-01 00:00:00","417788.02999999985"
+"2017-05-01 00:00:00","592918.8200000023"
+"2017-06-01 00:00:00","511276.38000000356"
+"2017-07-01 00:00:00","592382.9200000011"
+"2017-08-01 00:00:00","674396.3200000031"
+"2017-09-01 00:00:00","727762.4499999982"
+"2017-10-01 00:00:00","779677.8799999985"
+"2017-11-01 00:00:00","1194882.800000001"
+"2017-12-01 00:00:00","878401.4800000002"
+"2018-01-01 00:00:00","1115004.1800000034"
+"2018-02-01 00:00:00","992463.3399999995"
+"2018-03-01 00:00:00","1159652.1199999978"
+"2018-04-01 00:00:00","1160785.4799999953"
+"2018-05-01 00:00:00","1153982.149999994"
+"2018-06-01 00:00:00","1023880.4999999998"
+"2018-07-01 00:00:00","1066540.7500000014"
+"2018-08-01 00:00:00","1022425.319999998"
+"2018-09-01 00:00:00","4439.54"
+"2018-10-01 00:00:00","589.67"
