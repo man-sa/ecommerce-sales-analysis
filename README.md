@@ -39,9 +39,8 @@ Performed data analysis using SQL queries such as:
 
 * SQL Queries (`.sql`)
 * Power BI Dashboard (`.pbix`)
-* <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/39cb465c-c14e-43ef-bb42-c306eb716ac7" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9ab2690a-0da9-48c5-b5fb-a738806ae372" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f7201f1a-e498-4c7e-a999-2c7ee19bc8d9" />
+<img width="946" height="558" alt="e commerce" src="https://github.com/user-attachments/assets/d000c642-b1c0-4f1f-83af-bb13f8b776d2" />
+
 * Dataset (`.csv`)
 
 ## Outcome
